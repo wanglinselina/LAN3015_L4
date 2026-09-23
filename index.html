@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【北上開拓】工作匯報與公司介紹會議工作檯</title>
+    <style>
+        :root { --primary: #0f766e; --secondary: #c2410c; --bg: #f8fafc; --white: #ffffff; --text: #334155; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: var(--bg); margin: 0; padding: 15px; color: var(--text); line-height: 1.6; }
+        .container { max-width: 950px; margin: 0 auto; background: var(--white); border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); overflow: hidden; padding-bottom: 20px; }
+        .header { background: var(--primary); color: var(--white); padding: 25px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 1.6em; letter-spacing: 1px; }
+        .header p { margin: 5px 0 0; opacity: 0.9; }
+        
+        .timer-container { background: #e2e8f0; color: var(--primary); padding: 10px; text-align: center; font-size: 1.2em; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 15px; border-bottom: 1px solid #cbd5e1;}
+        .timer-btn { background: var(--primary); border: none; color: white; padding: 5px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .timer-btn:hover { background: #115e59; }
+
+        .section { padding: 20px 25px; }
+        h2 { color: var(--secondary); border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-top: 0; }
+        
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        label { font-weight: bold; display: block; margin: 10px 0 5px; color: #0f172a; }
+        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 5px; box-sizing: border-box; font-family: inherit; }
+        textarea { resize: vertical; min-height: 90px; }
+        input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.2); }
+        
+        .role-card { background: #f0fdfa; padding: 15px; border-radius: 6px; border: 1px solid #ccfbf1; margin-bottom: 15px;}
+        .role-card h3 { margin: 0 0 10px 0; color: #0f766e; }
+        .tips { font-size: 0.9em; color: #475569; margin-bottom: 10px; background: #fffbeb; padding: 8px; border-left: 4px solid #f59e0b; }
+        
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .checkbox-item { background: #f1f5f9; padding: 5px 10px; border-radius: 4px; font-size: 0.9em; }
+
+        .btn-export { display: block; width: 90%; margin: 30px auto 0; padding: 15px; background-color: var(--primary); color: white; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .btn-export:hover { background-color: #115e59; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🏆 【北上開拓】工作匯報與公司介紹會議</h1>
+        <p>小組劇本共編與會議準備工作檯</p>
+    </div>
+    
+    <div class="timer-container">
+        <span>⏳ 準備與排練時間：<span id="time-display">15:00</span></span>
+        <button class="timer-btn" onclick="startTimer()">開始計時</button>
+        <button class="timer-btn" onclick="pauseTimer()">暫停</button>
+    </div>
+
+    <!-- 背景與分工 -->
+    <div class="section">
+        <h2>📋 第一部分：任務背景與角色分工</h2>
+        <div class="tips">
+            <strong>背景：</strong> 我們是「普惠教育科技有限公司」，全港5大電子教學產品供應商之一。即將赴北京考察，今天召開內部會議，演練公司介紹並匯報與北京方面的「摸底」情況。
+        </div>
+        <div class="grid-2col">
+            <div>
+                <label>組別：</label>
+                <input type="text" id="groupName" placeholder="例如：第 3 組">
+            </div>
+            <div>
+                <label>會議日期：</label>
+                <input type="text" id="meetingDate" placeholder="例如：2026年11月10日">
+            </div>
+        </div>
+    </div>
+
+    <!-- 劇本草擬 -->
+    <div class="section">
+        <h2>📝 第二部分：會議發言腳本草擬</h2>
+        
+        <div class="role-card">
+            <h3>👤 主席 (部門經理)：<input type="text" id="name1" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>掌控會議氣氛、總結討論、分配工作。<br>
+                <strong>必須包含：</strong>標準開場白、引導同事發言、會議結語。
+            </div>
+            <textarea id="script1" placeholder="請草擬你的發言（例如：各位已經到齊了，會議正式開始... 接下來請ＯＯ介紹我們公司的背景...）"></textarea>
+        </div>
+
+        <div class="role-card">
+            <h3>👤 與會者 A (公關主任)：<input type="text" id="name2" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>赴京考察前的「公司介紹」演練。<br>
+                <strong>必須包含：</strong>普惠成立於 2005 年、客戶 >180,000 師生、產品涵蓋電子白板與語音識別電腦。
+            </div>
+            <textarea id="script2" placeholder="請草擬你的發言（例如：我們普惠教育科技在2005年成立，一直致力於...）"></textarea>
+        </div>
+
+        <div class="role-card">
+            <h3>👤 與會者 B (市場推廣主任)：<input type="text" id="name3" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>匯報北京方面的聯絡進度。<br>
+                <strong>必須包含：</strong>數據與比較句式（如：比去年同期增長...）、至少使用 2 個內地職場用語。
+            </div>
+            <textarea id="script3" placeholder="請草擬你的發言（例如：我跟北京教育集團的張主任通過兩次電話，初步摸底後發現...）"></textarea>
+        </div>
+
+        <div class="role-card">
+            <h3>👤 與會者 C (專案分析員)：<input type="text" id="name4" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>善用提問發掘新信息，並提出解決方案。<br>
+                <strong>必須包含：</strong>針對匯報內容提出疑問（如：會不會太貴了？）、提出具體建議。
+            </div>
+            <textarea id="script4" placeholder="請草擬你的發言（例如：這幾款產品確實不錯，但是... 我有一個建議，大家看看行不行...）"></textarea>
+        </div>
+    </div>
+
+    <!-- 內地用語檢核 -->
+    <div class="section">
+        <h2>✅ 第三部分：內地職場常用語檢核清單</h2>
+        <p style="font-size: 0.9em; color: #64748b;">請勾選你們在劇本中成功運用的詞彙（至少需包含 2 個）：</p>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="vocab1" value="摸底"> 摸底 (了解內情)</label>
+            <label class="checkbox-item"><input type="checkbox" id="vocab2" value="統一思想"> 統一思想 (達成共識)</label>
+            <label class="checkbox-item"><input type="checkbox" id="vocab3" value="隨大流"> 隨大流 (隨多數人意見)</label>
+            <label class="checkbox-item"><input type="checkbox" id="vocab4" value="踩點"> 踩點 (探路)</label>
+            <label class="checkbox-item"><input type="checkbox" id="vocab5" value="開綠燈"> 開綠燈 (允許/支持)</label>
+            <label class="checkbox-item"><input type="checkbox" id="vocab6" value="很火"> 很火 (盛行)</label>
+            <label class="checkbox-item"><input type="checkbox" id="vocab7" value="不到位"> 不到位 (沒達到預期)</label>
+        </div>
+    </div>
+
+    <button class="btn-export" onclick="exportToWord()">📥 匯出會議劇本與工作報告 (Word)</button>
+</div>
+
+<script>
+    // Timer Logic
+    let timeInSecs = 15 * 60; // 15 minutes for prep
+    let timerInterval;
+    let isRunning = false;
+
+    function updateTimerDisplay() {
+        const m = Math.floor(timeInSecs / 60).toString().padStart(2, '0');
+        const s = (timeInSecs % 60).toString().padStart(2, '0');
+        document.getElementById('time-display').innerText = `${m}:${s}`;
+    }
+
+    function startTimer() {
+        if (!isRunning && timeInSecs > 0) {
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                timeInSecs--;
+                updateTimerDisplay();
+                if (timeInSecs <= 0) {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                    alert("⏳ 15分鐘準備時間結束！請各組準備上台進行模擬會議。");
+                }
+            }, 1000);
+        }
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+        isRunning = false;
+    }
+
+    // Export Logic
+    function exportToWord() {
+        const getVal = (id) => (document.getElementById(id).value || '尚未填寫').replace(/\n/g, '<br>');
+        const getName = (id) => document.getElementById(id).value || '未指派';
+        
+        const gName = getVal('groupName'); 
+        const gDate = getVal('meetingDate');
+        
+        const r1 = getName('name1'); const s1 = getVal('script1');
+        const r2 = getName('name2'); const s2 = getVal('script2');
+        const r3 = getName('name3'); const s3 = getVal('script3');
+        const r4 = getName('name4'); const s4 = getVal('script4');
+
+        // Checkboxes
+        let usedVocabs = [];
+        for (let i = 1; i <= 7; i++) {
+            let cb = document.getElementById('vocab' + i);
+            if (cb && cb.checked) {
+                usedVocabs.push(cb.value);
+            }
+        }
+        const vocabStr = usedVocabs.length > 0 ? usedVocabs.join('、') : '未使用指定詞彙';
+
+        let htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head>
+        <meta charset='utf-8'>
+        <title>工作匯報會議劇本</title>
+        <style>
+            body { font-family: 'Microsoft YaHei', sans-serif; line-height: 1.6; }
+            h1 { color: #0f766e; text-align: center; border-bottom: 2px solid #0f766e; padding-bottom: 10px; }
+            h2 { color: #c2410c; margin-top: 20px; background-color: #f8fafc; padding: 5px; border-left: 5px solid #c2410c;}
+            .box { border: 1px solid #cbd5e1; padding: 15px; margin-bottom: 15px; background-color: #f0fdfa; }
+            .name-tag { font-weight: bold; color: #0f766e; }
+        </style>
+        </head>
+        <body>
+            <h1>【北上開拓】工作匯報會議劇本</h1>
+            <p><strong>組別：</strong> ${gName} &nbsp;&nbsp;&nbsp; <strong>日期：</strong> ${gDate}</p>
+            
+            <h2>✅ 內地職場常用語運用紀錄</h2>
+            <p>本組成功運用的詞彙包含：<strong>${vocabStr}</strong></p>
+
+            <h2>📝 會議發言內容</h2>
+            
+            <div class="box">
+                <p class="name-tag">主席 (部門經理) - ${r1}：</p>
+                <p>${s1}</p>
+            </div>
+            
+            <div class="box">
+                <p class="name-tag">與會者 A (公關主任) - ${r2}：</p>
+                <p>${s2}</p>
+            </div>
+            
+            <div class="box">
+                <p class="name-tag">與會者 B (市場推廣主任) - ${r3}：</p>
+                <p>${s3}</p>
+            </div>
+            
+            <div class="box">
+                <p class="name-tag">與會者 C (專案分析員) - ${r4}：</p>
+                <p>${s4}</p>
+            </div>
+
+        </body>
+        </html>
+        `;
+
+        const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${gName}_工作匯報劇本.doc`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+</script>
+
+</body>
+</html>
