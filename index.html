@@ -32,20 +32,8 @@
         .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
         .checkbox-item { background: #f1f5f9; padding: 5px 10px; border-radius: 4px; font-size: 0.9em; }
 
-        /* 錄音區塊樣式 */
-        .audio-studio { background: #fff7ed; border: 2px dashed #f97316; padding: 20px; border-radius: 8px; text-align: center; margin-top: 15px; }
-        .record-btn { background: #dc2626; color: white; border: none; padding: 10px 20px; font-size: 1.1em; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
-        .record-btn:hover { background: #b91c1c; }
-        .stop-btn { background: #475569; color: white; border: none; padding: 10px 20px; font-size: 1.1em; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; }
-        .stop-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .download-audio-btn { background: #059669; color: white; text-decoration: none; padding: 10px 20px; font-size: 1.1em; border-radius: 5px; font-weight: bold; margin: 5px; display: inline-block; }
-        
         .btn-export { display: block; width: 90%; margin: 30px auto 0; padding: 15px; background-color: var(--primary); color: white; border: none; border-radius: 5px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: background 0.3s; }
         .btn-export:hover { background-color: #115e59; }
-
-        /* 閃爍動畫效果 */
-        @keyframes blink { 50% { opacity: 0; } }
-        .recording-indicator { color: #dc2626; font-weight: bold; animation: blink 1s infinite; display: none; margin-bottom: 10px;}
     </style>
 </head>
 <body>
@@ -57,7 +45,7 @@
     </div>
     
     <div class="timer-container">
-        <span>⏳ 準備與排練時間：<span id="time-display">15:00</span></span>
+        <span>⏳ 準備與排練時間：<span id="time-display">30:00</span></span>
         <button class="timer-btn" onclick="startTimer()">開始計時</button>
         <button class="timer-btn" onclick="pauseTimer()">暫停</button>
     </div>
@@ -75,7 +63,7 @@
             </div>
             <div>
                 <label>會議日期：</label>
-                <input type="text" id="meetingDate" placeholder="例如：2026年11月10日">
+                <input type="text" id="meetingDate" placeholder="例如：2026年10月15日">
             </div>
         </div>
     </div>
@@ -86,21 +74,37 @@
         
         <div class="role-card">
             <h3>👤 主席 (部門經理)：<input type="text" id="name1" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>掌控會議氣氛、總結討論、分配工作。<br>
+                <strong>必須包含：</strong>標準開場白、引導同事發言、會議結語。
+            </div>
             <textarea id="script1" placeholder="請草擬你的發言（例如：各位已經到齊了，會議正式開始... 接下來請ＯＯ介紹我們公司的背景...）"></textarea>
         </div>
 
         <div class="role-card">
             <h3>👤 與會者 A (公關主任)：<input type="text" id="name2" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>赴京考察前的「公司介紹」演練。<br>
+                <strong>必須包含：</strong>普惠成立於 2005 年、客戶 >180,000 師生、產品涵蓋電子白板與語音識別電腦。
+            </div>
             <textarea id="script2" placeholder="請草擬你的發言（例如：我們普惠教育科技在2005年成立，一直致力於...）"></textarea>
         </div>
 
         <div class="role-card">
             <h3>👤 與會者 B (市場推廣主任)：<input type="text" id="name3" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>匯報北京方面的聯絡進度。<br>
+                <strong>必須包含：</strong>數據與比較句式（如：比去年同期增長...）、至少使用 2 個內地職場用語。
+            </div>
             <textarea id="script3" placeholder="請草擬你的發言（例如：我跟北京教育集團的張主任通過兩次電話，初步摸底後發現...）"></textarea>
         </div>
 
         <div class="role-card">
             <h3>👤 與會者 C (專案分析員)：<input type="text" id="name4" placeholder="輸入姓名" style="width:150px; display:inline-block; padding:5px; margin-left:10px;"></h3>
+            <div class="tips">
+                <strong>職責：</strong>善用提問發掘新信息，並提出解決方案。<br>
+                <strong>必須包含：</strong>針對匯報內容提出疑問（如：會不會太貴了？）、提出具體建議。
+            </div>
             <textarea id="script4" placeholder="請草擬你的發言（例如：這幾款產品確實不錯，但是... 我有一個建議，大家看看行不行...）"></textarea>
         </div>
     </div>
@@ -108,6 +112,7 @@
     <!-- 內地用語檢核 -->
     <div class="section">
         <h2>✅ 第三部分：內地職場常用語檢核清單</h2>
+        <p style="font-size: 0.9em; color: #64748b;">請勾選你們在劇本中成功運用的詞彙（至少需包含 2 個）：</p>
         <div class="checkbox-group">
             <label class="checkbox-item"><input type="checkbox" id="vocab1" value="摸底"> 摸底 (了解內情)</label>
             <label class="checkbox-item"><input type="checkbox" id="vocab2" value="統一思想"> 統一思想 (達成共識)</label>
@@ -119,30 +124,12 @@
         </div>
     </div>
 
-    <!-- 全真演練錄音室 -->
-    <div class="section">
-        <h2>🎙️ 第四部分：會議全真演練 (錄音室)</h2>
-        <p style="font-size: 0.9em; color: #475569;">請小組開啟麥克風，根據上方撰寫的劇本進行普通話實戰演練。錄音完成後可下載音檔繳交。</p>
-        
-        <div class="audio-studio">
-            <div id="recordingIndicator" class="recording-indicator">🔴 正在錄音中... 請小組開始發言</div>
-            
-            <button id="startRecordBtn" class="record-btn" onclick="startRecording()">🎤 開始錄音</button>
-            <button id="stopRecordBtn" class="stop-btn" onclick="stopRecording()" disabled>⏹️ 停止錄音</button>
-            
-            <br><br>
-            <audio id="audioPlayback" controls style="display:none; margin: 10px auto; outline: none;"></audio>
-            <br>
-            <a id="downloadAudioBtn" class="download-audio-btn" style="display:none;">💾 下載會議錄音檔 (.webm)</a>
-        </div>
-    </div>
-
     <button class="btn-export" onclick="exportToWord()">📥 匯出會議劇本與工作報告 (Word)</button>
 </div>
 
 <script>
     // --- 計時器邏輯 ---
-    let timeInSecs = 15 * 60;
+    let timeInSecs = 30 * 60; // 修改為 30 分鐘
     let timerInterval;
     let isRunning = false;
 
@@ -161,7 +148,7 @@
                 if (timeInSecs <= 0) {
                     clearInterval(timerInterval);
                     isRunning = false;
-                    alert("⏳ 15分鐘準備時間結束！請各組準備上台進行模擬會議。");
+                    alert("⏳ 30分鐘準備時間結束！請各組準備上台進行模擬會議。");
                 }
             }, 1000);
         }
@@ -170,65 +157,6 @@
     function pauseTimer() {
         clearInterval(timerInterval);
         isRunning = false;
-    }
-
-    // --- 錄音室邏輯 ---
-    let mediaRecorder;
-    let audioChunks = [];
-
-    async function startRecording() {
-        try {
-            // 要求麥克風權限
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
-            
-            mediaRecorder.ondataavailable = event => {
-                audioChunks.push(event.data);
-            };
-
-            mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                const audioUrl = URL.createObjectURL(audioBlob);
-                
-                // 設定播放器
-                const audioPlayback = document.getElementById('audioPlayback');
-                audioPlayback.src = audioUrl;
-                audioPlayback.style.display = 'block';
-                
-                // 設定下載按鈕
-                const downloadBtn = document.getElementById('downloadAudioBtn');
-                const gName = document.getElementById('groupName').value || '未命名組別';
-                downloadBtn.href = audioUrl;
-                downloadBtn.download = `${gName}_會議錄音.webm`;
-                downloadBtn.style.display = 'inline-block';
-                
-                audioChunks = []; // 重置緩存
-            };
-
-            mediaRecorder.start();
-            
-            // 切換按鈕狀態與動畫
-            document.getElementById('startRecordBtn').disabled = true;
-            document.getElementById('startRecordBtn').style.opacity = '0.5';
-            document.getElementById('stopRecordBtn').disabled = false;
-            document.getElementById('recordingIndicator').style.display = 'block';
-            
-        } catch (err) {
-            alert("無法存取麥克風 🎤\n請確認您的設備有麥克風，並且在瀏覽器彈出視窗時點擊了「允許」。");
-            console.error("麥克風錯誤:", err);
-        }
-    }
-
-    function stopRecording() {
-        if(mediaRecorder && mediaRecorder.state !== 'inactive') {
-            mediaRecorder.stop();
-            
-            // 恢復按鈕狀態與關閉動畫
-            document.getElementById('startRecordBtn').disabled = false;
-            document.getElementById('startRecordBtn').style.opacity = '1';
-            document.getElementById('stopRecordBtn').disabled = true;
-            document.getElementById('recordingIndicator').style.display = 'none';
-        }
     }
 
     // --- 匯出 Word 邏輯 ---
